@@ -1,22 +1,13 @@
-import React from 'react'
-import GoogleLogin from 'react-google-login'
+import React, { useState, useEffect } from 'react'
+import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import Header from './components/Header'
 
 export default function App() {
-
-  const responseGoogle = (response) => {
-    console.log(response)
-    console.log(response.profileObj)
-  }
+  const [googleId, setGoogleId] = useState(null)
 
   return (
     <div>
-      <GoogleLogin
-        clientId='399548900107-q6hopk6di730ppv7dnf2q40hv70nl4k0.apps.googleusercontent.com'
-        buttonText='Login'
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-      />
+      <Header googleId={googleId} setGoogleId={setGoogleId} />
     </div>
   )
 }
