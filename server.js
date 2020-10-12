@@ -75,7 +75,20 @@ app.delete('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const deleted = await User.findByIdAndDelete(id)
+
     if (deleted) {
+      // remove all votes
+      let refMatches = await Match.find().where('votes1').in(id).exec()
+      refMatches.forEach(match => {
+        match['votes1'] = match['votes1'].filter(id => id != id)
+        match.save()
+      })
+      let refMatches2 = await Match.find().where('votes2').in(id).exec()
+      refMatches2.forEach(match => {
+        match['votes2'] = match['votes2'].filter(id => id != id)
+        match.save()
+      })
+
       return res.status(200).send("User deleted")
     }
     throw new Error("User not found")
