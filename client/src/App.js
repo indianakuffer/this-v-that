@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import React, { useState } from 'react'
 import Header from './components/Header'
 
 export default function App() {
-  const [googleId, setGoogleId] = useState(null)
+  const [userInfo, setUserInfo] = useState(null)
 
   return (
     <div>
-      <Header googleId={googleId} setGoogleId={setGoogleId} />
+      <Header userInfo={userInfo} setUserInfo={setUserInfo} />
     </div>
   )
 }
