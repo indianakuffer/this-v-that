@@ -9,6 +9,15 @@ export const getMatches = async () => {
   }
 }
 
+export const getUserMatches = async (id) => {
+  try {
+    const response = await api.get(`/matches/user/${id}`)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const getMatch = async id => {
   try {
     const response = await api.get(`/matches/${id}`)

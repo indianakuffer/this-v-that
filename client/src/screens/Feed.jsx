@@ -12,29 +12,38 @@ const FeedContainer = styled.div`
 
 `
 const MatchButton = styled(Link)`
+display: flex;
+position: relative;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 80px;
+margin: 10px 0;
+overflow: hidden;
+text-decoration: none;
+.left, .right {
+  height: 100%;
+  width: 50%;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 80px;
-  margin: 10px 0;
-  border-radius: 10px;
-  overflow: hidden;
-  text-decoration: none;
-  .left, .right {
-    height: 100%;
-    width: 50%;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .left {
-    background: ${props => props.option1color};
-  }
-  .right {
-    background: ${props => props.option2color};
-  }
+  position: absolute;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.left {
+  left: 2.5%;
+  background: ${props => props.option1color};
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+  border-radius: 10px 0 0 10px;
+}
+.right {
+  right: 2.5%;
+  background: ${props => props.option2color};
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+  border-radius: 0 10px 10px 0;
+}
 `
 
 export default function Feed(props) {

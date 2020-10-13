@@ -121,6 +121,18 @@ app.get('/matches/:id', async (req, res) => {
   }
 })
 
+app.get('/matches/user/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    let matches = await Match.find()
+    matches = matches.filter(match => match.votes1.includes(id) || match.votes2.includes(id))
+    res.json(matches)
+  } catch (e) {
+    console.log(e)
+    res.send('Match not found!')
+  }
+})
+
 app.post('/matches/:userId', async (req, res) => {
   try {
     const { userId } = req.params
