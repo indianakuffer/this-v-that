@@ -18,7 +18,7 @@ export const getMatch = async id => {
   }
 }
 
-export const createMatch = async user => {
+export const createMatch = async match => {
   try {
     const response = await api.post('/matches', match)
     return response.data

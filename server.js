@@ -161,7 +161,8 @@ app.put('/matches/:id/vote', async (req, res) => {
     if (prev.votes1.includes(req.body.votes1)) {
       newBody = {
         votes1: [...prev.votes1.filter(id => id != req.body.votes1)],
-        votes2: [...prev.votes2]
+        votes2: [...prev.votes2],
+        count: prev.count - 1
       }
     } else if (prev.votes2.includes(req.body.votes1)) {
       newBody = {
@@ -169,13 +170,17 @@ app.put('/matches/:id/vote', async (req, res) => {
         votes2: [...prev.votes2.filter(id => id != req.body.votes1)]
       }
     } else {
-      newBody = { votes1: [...prev.votes1, req.body.votes1] }
+      newBody = {
+        votes1: [...prev.votes1, req.body.votes1],
+        count: prev.count + 1
+      }
     }
   } else if (req.body.votes2) {
     if (prev.votes2.includes(req.body.votes2)) {
       newBody = {
         votes1: [...prev.votes1],
-        votes2: [...prev.votes2.filter(id => id != req.body.votes2)]
+        votes2: [...prev.votes2.filter(id => id != req.body.votes2)],
+        count: prev.count - 1
       }
     } else if (prev.votes1.includes(req.body.votes2)) {
       newBody = {
@@ -183,7 +188,10 @@ app.put('/matches/:id/vote', async (req, res) => {
         votes2: [...prev.votes2, req.body.votes2]
       }
     } else {
-      newBody = { votes2: [...prev.votes2, req.body.votes2] }
+      newBody = {
+        votes2: [...prev.votes2, req.body.votes2],
+        count: prev.count + 1
+      }
     }
   }
 

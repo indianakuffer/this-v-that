@@ -10,6 +10,8 @@ const Match = new Schema(
     },
     option1: { type: String, required: true },
     option2: { type: String, required: true },
+    option1Color: { type: String, required: true, default: 'slateblue' },
+    option2Color: { type: String, required: true, default: 'indianred' },
     votes1: [{
       type: Schema.Types.ObjectId,
       ref: 'User'
@@ -17,7 +19,8 @@ const Match = new Schema(
     votes2: [{
       type: Schema.Types.ObjectId,
       ref: 'User'
-    }]
+    }],
+    count: { type: Number, default: 0, required: true }
   },
   { timestamps: true }
 )

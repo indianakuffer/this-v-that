@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import { Link } from 'react-router-dom'
 import { getUser, createUser } from '../services/users'
 
 const StyledHeader = styled.header`
@@ -37,7 +38,7 @@ export default function Header(props) {
 
   return (
     <StyledHeader>
-      <div>This v That</div>
+      <Link to='/'>This v That</Link>
       {props.userInfo ?
         <GoogleLogout
           clientId='399548900107-q6hopk6di730ppv7dnf2q40hv70nl4k0.apps.googleusercontent.com'
