@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom'
 import Feed from './screens/Feed'
 import Match from './screens/Match'
 import Account from './screens/Account'
-import Create from './screens/Create'
 
 export default function App() {
   const [userInfo, setUserInfo] = useState(null)
@@ -15,16 +14,13 @@ export default function App() {
       <Header userInfo={userInfo} setUserInfo={setUserInfo} />
       <Switch>
         <Route path='/' exact>
-          <Feed />
+          <Feed userInfo={userInfo} />
         </Route>
         <Route path='/account' exact>
           <Account userInfo={userInfo} />
         </Route>
         <Route path='/:id' exact>
           <Match userInfo={userInfo} />
-        </Route>
-        <Route path='/create' exact>
-          <Create userInfo={userInfo} />
         </Route>
       </Switch>
     </div>

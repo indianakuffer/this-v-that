@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { getMatch, voteMatch } from '../services/matches'
+import { getMatch, voteMatch, deleteMatch } from '../services/matches'
 
 const Container = styled.div`
   width: 100%;
@@ -68,12 +68,16 @@ const Divider = styled.div`
   z-index: 10;
   pointer-events: none;
 `
+const DeleteButton = styled.button`
+  background: red;
+`
 
 export default function Match(props) {
   let params = useParams()
   let defaultColor = '#dfdfdf'
   let [matchData, setMatchData] = useState(null)
   let [highlight, setHighlight] = useState({ left: defaultColor, right: defaultColor })
+  let history = useHistory()
 
   useEffect(() => {
     fetchMatch(params.id)
@@ -81,7 +85,6 @@ export default function Match(props) {
 
   useEffect(() => {
     if (!matchData || !props.userInfo) { return }
-    // fetchMatch(params.id)
     if (matchData.votes1.includes(props.userInfo._id)) {
       setHighlight({ left: matchData.option1Color, right: defaultColor })
     } else if (matchData.votes2.includes(props.userInfo._id)) {
@@ -106,6 +109,13 @@ export default function Match(props) {
     setMatchData(response)
   }
 
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this match?')) {
+      await deleteMatch(matchData._id)
+      history.push('/')
+    }
+  }
+
   return (
     <Container>
       {matchData &&
@@ -120,6 +130,9 @@ export default function Match(props) {
             <RightCounter>{matchData.votes2.length}</RightCounter>
           </div>
         </MatchContainer>
+      }
+      {matchData && props.userInfo && matchData.creator === props.userInfo._id &&
+        <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
       }
     </Container>
   )

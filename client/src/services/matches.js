@@ -27,9 +27,9 @@ export const getMatch = async id => {
   }
 }
 
-export const createMatch = async match => {
+export const createMatch = async (id, match) => {
   try {
-    const response = await api.post('/matches', match)
+    const response = await api.post(`/matches/${id}`, match)
     return response.data
   } catch (error) {
     throw error
