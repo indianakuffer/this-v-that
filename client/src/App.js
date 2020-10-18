@@ -3,7 +3,7 @@ import Header from './components/Header'
 import { Switch, Route } from 'react-router-dom'
 // import styled from 'styled-components'
 import Feed from './screens/Feed'
-import Match from './screens/Match'
+import Details from './screens/Details'
 import Account from './screens/Account'
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
           <Account userInfo={userInfo} />
         </Route>
         <Route path='/:id' exact>
-          <Match userInfo={userInfo} />
+          <Details userInfo={userInfo} />
         </Route>
       </Switch>
     </div>

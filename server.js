@@ -133,6 +133,18 @@ app.get('/matches/user/:id', async (req, res) => {
   }
 })
 
+app.get('/matches/search/:query', async (req, res) => {
+  try {
+    const { query } = req.params
+    let matches = await Match.find()
+    matches = matches.filter(match => match.option1.toLowerCase().includes(query.toLowerCase()) || match.option2.toLowerCase().includes(query.toLowerCase()))
+    res.json(matches)
+  } catch (e) {
+    console.log(e)
+    res.send('Match not found!')
+  }
+})
+
 app.post('/matches/:userId', async (req, res) => {
   try {
     const { userId } = req.params

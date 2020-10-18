@@ -27,6 +27,15 @@ export const getMatch = async id => {
   }
 }
 
+export const searchMatches = async query => {
+  try {
+    const response = await api.get(`/matches/search/${query}`)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const createMatch = async (id, match) => {
   try {
     const response = await api.post(`/matches/${id}`, match)

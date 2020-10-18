@@ -103,6 +103,10 @@ export default function Create(props) {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (formData.option1.length > 30 || formData.option2.length > 30) {
+      alert('Please keep options 30 characters or less.')
+      return
+    }
     let response = await createMatch(props.userInfo._id, formData)
     history.push(`/${response._id}`)
   }
