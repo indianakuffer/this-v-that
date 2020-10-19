@@ -7,6 +7,8 @@ import { getMatch, voteMatch, deleteMatch } from '../services/matches'
 const Container = styled.div`
   width: 100%;
   padding: 10px;
+  max-width: 600px;
+  margin: 0 auto;
 `
 const DeleteButton = styled.button`
   margin-top: 20px;

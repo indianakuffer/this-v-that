@@ -8,6 +8,8 @@ import Searchbar from '../components/Searchbar'
 
 const Container = styled.div`
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 `
 const FeedContainer = styled.div`
   width: 100%;
@@ -60,8 +62,6 @@ export default function Feed(props) {
   const redirect = (id) => {
     history.push(`/${id}`)
   }
-
-  let fakeData = [{ "option1Color": "#2C699A", "option2Color": "#A61120", "votes1": [], "votes2": ["5f8e0d76db445c002490d2d5"], "count": 1, "_id": "5f8e0de4db445c002490d2d6", "option1": "This", "option2": "That", "creator": "5f8e0d76db445c002490d2d5", "createdAt": "2020-10-19T22:06:28.993Z", "updatedAt": "2020-10-19T22:06:39.678Z", "__v": 0 }, { "option1Color": "slateblue", "option2Color": "indianred", "votes1": [], "votes2": ["5f8e0d76db445c002490d2d5"], "count": 1, "_id": "5f8e10b8db445c002490d2d7", "option1": "me", "option2": "you", "creator": "5f8e0d76db445c002490d2d5", "createdAt": "2020-10-19T22:18:32.430Z", "updatedAt": "2020-10-19T22:26:33.602Z", "__v": 0 }]
 
   return (
     <Container>

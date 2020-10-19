@@ -67,7 +67,6 @@ const RightCounter = styled.div`
 `
 const Divider = styled.div`
   position: absolute;
-  background: linear-gradient(104deg, rgba(102,102,102,1) 6%, rgba(0,212,255,0) 11%);
   clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
   width: 50%;
   height: 80px;
