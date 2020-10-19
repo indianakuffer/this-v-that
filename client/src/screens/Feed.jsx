@@ -83,19 +83,19 @@ export default function Feed(props) {
     <Container>
       <Searchbar setMatchList={setMatchList} />
       <FeedContainer>
-        {fakeData.map(match => {
-          return (
-            <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={`feed-${match._id}`} />
-          )
-        })}
+        {fakeData &&
+          fakeData.map(match => {
+            return (
+              <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={`feed-${match._id}`} />
+            )
+          })}
         {matchList &&
           matchList.map(match => {
             return (
               // awkward repurposing of Match component
               <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={`feed-${match._id}`} />
             )
-          })
-        }
+          })}
       </FeedContainer>
       <CreateButton onClick={toggleCreate}>+</CreateButton>
       {showCreate &&
