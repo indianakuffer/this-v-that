@@ -46,7 +46,7 @@ export default function Feed(props) {
 
   useEffect(() => {
     fetchFeed()
-  }, [])
+  }, [props.userInfo])
 
   const fetchFeed = async () => {
     let matches = await getMatches()
@@ -65,6 +65,9 @@ export default function Feed(props) {
     <Container>
       <Searchbar setMatchList={setMatchList} />
       <FeedContainer>
+        {matchList &&
+          <p>matchList is detected</p>
+        }
         {matchList &&
           matchList.map(match => {
             return (
