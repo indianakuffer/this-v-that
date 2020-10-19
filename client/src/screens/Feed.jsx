@@ -40,7 +40,7 @@ const CreateContainer = styled.div`
 `
 
 export default function Feed(props) {
-  let [matchList, setMatchList] = useState(null)
+  let [matchList, setMatchList] = useState([])
   let [showCreate, setShowCreate] = useState(false)
   let history = useHistory()
 
@@ -67,7 +67,7 @@ export default function Feed(props) {
     <Container>
       <Searchbar setMatchList={setMatchList} />
       <FeedContainer>
-        {matchList &&
+        {
           matchList.map(match => {
             return (
               // awkward repurposing of Match component
