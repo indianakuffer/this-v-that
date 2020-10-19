@@ -50,7 +50,9 @@ export default function Feed(props) {
 
   const fetchFeed = async () => {
     let matches = await getMatches()
+    console.log(matches)
     setMatchList(matches)
+    console.log(matchList)
   }
 
   const toggleCreate = () => {
