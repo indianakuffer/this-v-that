@@ -13,14 +13,14 @@ export default function App() {
     <div>
       <Header userInfo={userInfo} setUserInfo={setUserInfo} />
       <Switch>
-        <Route path='/' exact>
-          <Feed userInfo={userInfo} />
-        </Route>
         <Route path='/account' exact>
           <Account userInfo={userInfo} setUserInfo={setUserInfo} />
         </Route>
         <Route path='/:id' exact>
           <Details userInfo={userInfo} />
+        </Route>
+        <Route path='/'>
+          <Feed userInfo={userInfo} />
         </Route>
       </Switch>
     </div>
