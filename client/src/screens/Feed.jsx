@@ -66,13 +66,10 @@ export default function Feed(props) {
       <Searchbar setMatchList={setMatchList} />
       <FeedContainer>
         {matchList &&
-          <p>matchList is detected</p>
-        }
-        {matchList &&
           matchList.map(match => {
             return (
               // awkward repurposing of Match component
-              <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={match._id} />
+              <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={`feed-${match._id}`} />
             )
           })
         }
