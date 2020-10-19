@@ -29,7 +29,7 @@ const CreateButton = styled.button`
   font-size: 45px;
 `
 const CreateContainer = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;

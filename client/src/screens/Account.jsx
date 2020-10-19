@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { getUserMatches } from '../services/matches'
+import { deleteUser } from '../services/users'
+import { useGoogleLogout } from 'react-google-login'
 
 const Container = styled.div`
   width: 100%;
@@ -30,6 +32,9 @@ const AccountMatch = styled(Link)`
   display: block;
   text-decoration: none;
   margin-bottom: 8px;
+  align-self: flex-start;
+  margin-left: 10%;
+  color: grey;
   span {
     font-weight: bold;
   }
@@ -37,6 +42,11 @@ const AccountMatch = styled(Link)`
 
 export default function Account(props) {
   let [matchList, setMatchList] = useState(null)
+  let history = useHistory()
+  const { signOut } = useGoogleLogout({
+    clientId: '399548900107-q6hopk6di730ppv7dnf2q40hv70nl4k0.apps.googleusercontent.com',
+    onLogoutSuccess: logout
+  })
 
   useEffect(() => {
     if (!props.userInfo) { return }
@@ -46,6 +56,19 @@ export default function Account(props) {
   const fetchMatches = async (id) => {
     let response = await getUserMatches(id)
     setMatchList(response)
+  }
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete your account and all your votes?')) {
+      await deleteUser(props.userInfo._id)
+      signOut()
+    }
+  }
+
+  function logout() {
+    history.push('/')
+    localStorage.clear()
+    props.setUserInfo(null)
   }
 
   return (
@@ -63,7 +86,7 @@ export default function Account(props) {
             )
           })}
           <hr />
-          <DeleteButton>Delete Account</DeleteButton>
+          <DeleteButton onClick={handleDelete}>Delete Account</DeleteButton>
         </>
       }
     </Container>

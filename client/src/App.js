@@ -17,7 +17,7 @@ export default function App() {
           <Feed userInfo={userInfo} />
         </Route>
         <Route path='/account' exact>
-          <Account userInfo={userInfo} />
+          <Account userInfo={userInfo} setUserInfo={setUserInfo} />
         </Route>
         <Route path='/:id' exact>
           <Details userInfo={userInfo} />

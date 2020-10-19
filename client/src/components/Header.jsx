@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { GoogleLogin, GoogleLogout } from 'react-google-login'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { getUser, createUser } from '../services/users'
 
 const StyledHeader = styled.header`
@@ -40,6 +40,7 @@ const ProfileImage = styled(Link)`
 `
 
 export default function Header(props) {
+  let history = useHistory()
 
   const responseGoogle = async (response) => {
     let googleId = response.profileObj.googleId
@@ -59,6 +60,7 @@ export default function Header(props) {
   const logout = () => {
     props.setUserInfo(null)
     localStorage.clear()
+    history.push('/')
   }
 
   return (
