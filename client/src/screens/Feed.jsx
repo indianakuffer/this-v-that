@@ -40,7 +40,7 @@ const CreateContainer = styled.div`
 `
 
 export default function Feed(props) {
-  let [matchList, setMatchList] = useState([])
+  let [matchList, setMatchList] = useState(null)
   let [showCreate, setShowCreate] = useState(false)
   let history = useHistory()
 
@@ -50,9 +50,7 @@ export default function Feed(props) {
 
   const fetchFeed = async () => {
     let matches = await getMatches()
-    console.log(matches)
     setMatchList(matches)
-    console.log(matchList)
   }
 
   const toggleCreate = () => {
@@ -67,12 +65,11 @@ export default function Feed(props) {
     <Container>
       <Searchbar setMatchList={setMatchList} />
       <FeedContainer>
-        {
+        {matchList &&
           matchList.map(match => {
             return (
               // awkward repurposing of Match component
-              // <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={match._id} />
-              <p>{match.option1} v {match.option2}</p>
+              <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={match._id} />
             )
           })
         }
