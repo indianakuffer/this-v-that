@@ -42,11 +42,16 @@ const CreateContainer = styled.div`
 export default function Feed(props) {
   let [matchList, setMatchList] = useState(null)
   let [showCreate, setShowCreate] = useState(false)
+  let [rerender, setRerender] = useState(0)
   let history = useHistory()
 
   useEffect(() => {
     fetchFeed()
-  }, [props.userInfo])
+  }, [])
+
+  useEffect(() => {
+    setRerender(rerender + 1)
+  }, [matchList])
 
   const fetchFeed = async () => {
     let matches = await getMatches()
