@@ -76,7 +76,6 @@ export default function Feed(props) {
         {matchList &&
           fakeData.map(match => {
             return (
-              // awkward repurposing of Match component
               <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={`feed-${match._id}`} />
             )
           })}
