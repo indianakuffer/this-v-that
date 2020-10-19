@@ -61,37 +61,14 @@ export default function Feed(props) {
     history.push(`/${id}`)
   }
 
-  let fakeData = [{
-
-    "option1Color": "#2C699A",
-    "option2Color": "#A61120",
-    "votes1": [],
-    "votes2": [
-      "5f8e0d76db445c002490d2d5"
-    ],
-    "count": 1,
-    "_id": "5f8e0de4db445c002490d2d6",
-    "option1": "This",
-    "option2": "That",
-    "creator": "5f8e0d76db445c002490d2d5",
-    "createdAt": "2020-10-19T22:06:28.993Z",
-    "updatedAt": "2020-10-19T22:06:39.678Z",
-    "__v": 0
-  },
-  { "option1Color": "slateblue", "option2Color": "indianred", "votes1": [], "votes2": ["5f8e0d76db445c002490d2d5"], "count": 1, "_id": "5f8e10b8db445c002490d2d7", "option1": "me", "option2": "you", "creator": "5f8e0d76db445c002490d2d5", "createdAt": "2020-10-19T22:18:32.430Z", "updatedAt": "2020-10-19T22:26:33.602Z", "__v": 0 }]
+  let fakeData = [{ "option1Color": "#2C699A", "option2Color": "#A61120", "votes1": [], "votes2": ["5f8e0d76db445c002490d2d5"], "count": 1, "_id": "5f8e0de4db445c002490d2d6", "option1": "This", "option2": "That", "creator": "5f8e0d76db445c002490d2d5", "createdAt": "2020-10-19T22:06:28.993Z", "updatedAt": "2020-10-19T22:06:39.678Z", "__v": 0 }, { "option1Color": "slateblue", "option2Color": "indianred", "votes1": [], "votes2": ["5f8e0d76db445c002490d2d5"], "count": 1, "_id": "5f8e10b8db445c002490d2d7", "option1": "me", "option2": "you", "creator": "5f8e0d76db445c002490d2d5", "createdAt": "2020-10-19T22:18:32.430Z", "updatedAt": "2020-10-19T22:26:33.602Z", "__v": 0 }]
 
   return (
     <Container>
       <Searchbar setMatchList={setMatchList} />
       <FeedContainer>
-        {fakeData &&
-          fakeData.map(match => {
-            return (
-              <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={`feed-${match._id}`} />
-            )
-          })}
         {matchList &&
-          matchList.map(match => {
+          fakeData.map(match => {
             return (
               // awkward repurposing of Match component
               <Match matchData={{ ...match }} highlight={{ left: match.option1Color, right: match.option2Color }} updateVote={() => redirect(match._id)} key={`feed-${match._id}`} />
