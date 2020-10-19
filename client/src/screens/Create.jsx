@@ -13,6 +13,7 @@ const StyledForm = styled(animated.form)`
   border-radius: 20px;
   padding: 30px;
   max-width: 90vw;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
   input {
     width: 100%;
     height: 35px;
