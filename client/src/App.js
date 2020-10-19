@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Header from './components/Header'
+import { Switch, Route } from 'react-router-dom'
+// import styled from 'styled-components'
+import Feed from './screens/Feed'
+import Details from './screens/Details'
+import Account from './screens/Account'
 
-function App() {
+export default function App() {
+  const [userInfo, setUserInfo] = useState(null)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header userInfo={userInfo} setUserInfo={setUserInfo} />
+      <Switch>
+        <Route path='/' exact>
+          <Feed userInfo={userInfo} />
+        </Route>
+        <Route path='/account' exact>
+          <Account userInfo={userInfo} setUserInfo={setUserInfo} />
+        </Route>
+        <Route path='/:id' exact>
+          <Details userInfo={userInfo} />
+        </Route>
+      </Switch>
     </div>
-  );
+  )
 }
-
-export default App;
