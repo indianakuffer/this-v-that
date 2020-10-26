@@ -5,6 +5,7 @@ import { getMatches } from '../services/matches'
 import Create from './Create'
 import Match from '../components/Match'
 import Searchbar from '../components/Searchbar'
+import Loading from '../components/Loading'
 
 const Container = styled.div`
   width: 100%;
@@ -44,6 +45,7 @@ const CreateContainer = styled.div`
 export default function Feed(props) {
   let [matchList, setMatchList] = useState(null)
   let [showCreate, setShowCreate] = useState(false)
+  let [showLoading, setShowLoading] = useState(false)
   let history = useHistory()
 
   useEffect(() => {
@@ -51,12 +53,18 @@ export default function Feed(props) {
   }, [])
 
   const fetchFeed = async () => {
+    setShowLoading(true)
     let matches = await getMatches()
     setMatchList(matches)
+    setShowLoading(false)
   }
 
   const toggleCreate = () => {
-    setShowCreate(!showCreate)
+    if (!props.userInfo) {
+      alert('Please login to create a match!')
+    } else {
+      setShowCreate(!showCreate)
+    }
   }
 
   const redirect = (id) => {
@@ -67,6 +75,7 @@ export default function Feed(props) {
     <Container>
       <Searchbar setMatchList={setMatchList} />
       <FeedContainer>
+        {showLoading && <Loading />}
         {matchList &&
           matchList.map(match => {
             return (

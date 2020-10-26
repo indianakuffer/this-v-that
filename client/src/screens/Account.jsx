@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { getUserMatches } from '../services/matches'
 import { deleteUser } from '../services/users'
 import { useGoogleLogout } from 'react-google-login'
+import Loading from '../components/Loading'
 
 const Container = styled.div`
   width: 100%;
@@ -43,6 +44,7 @@ const AccountMatch = styled(Link)`
 export default function Account(props) {
   let [matchList, setMatchList] = useState(null)
   let history = useHistory()
+  let [showLoading, setShowLoading] = useState(false)
   const { signOut } = useGoogleLogout({
     clientId: '399548900107-q6hopk6di730ppv7dnf2q40hv70nl4k0.apps.googleusercontent.com',
     onLogoutSuccess: logout
@@ -54,8 +56,10 @@ export default function Account(props) {
   }, [props.userInfo])
 
   const fetchMatches = async (id) => {
+    setShowLoading(true)
     let response = await getUserMatches(id)
     setMatchList(response)
+    setShowLoading(false)
   }
 
   const handleDelete = async () => {
@@ -73,6 +77,7 @@ export default function Account(props) {
 
   return (
     <Container>
+      {showLoading && <Loading />}
       {props.userInfo && matchList &&
         <>
           <h2>Hey, {props.userInfo.givenName}!</h2>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import Loading from '../components/Loading'
 import Match from '../components/Match'
 import { getMatch, voteMatch, deleteMatch } from '../services/matches'
 
@@ -32,6 +33,7 @@ export default function Details(props) {
   let [matchData, setMatchData] = useState(null)
   let defaultColor = '#dfdfdf'
   let [highlight, setHighlight] = useState({ left: defaultColor, right: defaultColor })
+  let [showLoading, setShowLoading] = useState(false)
   let history = useHistory()
 
   useEffect(() => {
@@ -50,8 +52,10 @@ export default function Details(props) {
   }, [matchData, props.userInfo])
 
   const fetchMatch = async (id) => {
+    setShowLoading(true)
     let response = await getMatch(id)
     setMatchData(response)
+    setShowLoading(false)
   }
 
   const updateVote = async (option) => {
@@ -73,6 +77,7 @@ export default function Details(props) {
 
   return (
     <Container>
+      {showLoading && <Loading />}
       {matchData &&
         <Match matchData={matchData} highlight={highlight} updateVote={updateVote} />
       }
