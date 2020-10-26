@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Loading from '../components/Loading'
 import Match from '../components/Match'
@@ -20,12 +20,21 @@ const DeleteButton = styled.button`
   color: white;
   letter-spacing: 0.05rem;
 `
+const SmallBar = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 0.8rem;
+`
+const Back = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`
 const MatchDate = styled.div`
-  color: light-grey;
-  font-size: 0.6rem;
   text-align: right;
-  width: 95%;
-  transform: translateY(-8px);
+  color: grey;
 `
 
 export default function Details(props) {
@@ -78,12 +87,17 @@ export default function Details(props) {
   return (
     <Container>
       {showLoading && <Loading />}
+      <SmallBar>
+        <Back to='/' style={{ color: 'grey' }}>Back</Back>
+        {matchData && props.userInfo && matchData.creator === props.userInfo._id &&
+          <MatchDate>{new Date(matchData.createdAt).toLocaleDateString()}</MatchDate>}
+      </SmallBar>
       {matchData &&
         <Match matchData={matchData} highlight={highlight} updateVote={updateVote} />
       }
       {matchData && props.userInfo && matchData.creator === props.userInfo._id &&
         <>
-          <MatchDate>{new Date(matchData.createdAt).toLocaleDateString()}</MatchDate>
+
           <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
         </>
       }
